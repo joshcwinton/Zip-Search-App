@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import SearchForm from './components/SearchForm.js';
+import Results from './components/Results.js'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         Zip Code Search
       </header>
       <SearchForm />
+      <Results />
     </div>
   );
 }

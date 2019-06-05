@@ -10,17 +10,13 @@ class SearchForm extends Component {
     }
   }
 
-  fetchZipCodeData(){
-
-  }
-
-  componentDidMount(){
-
-  }
-
   render(){
     return (
-      <p>This will be the search form in a bit.</p>
+      <div id='search-form'>
+        <form>
+          Zip Code:  <input type="text" name="zip" placeholder="Try 10016" value={this.state.zipCode}/>
+        </form>
+      </div>
     );
   }
 }
