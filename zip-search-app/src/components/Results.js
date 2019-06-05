@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Results.css';
-import axios from 'axios';
 
 class Results extends Component {
   constructor(props){
