@@ -31,56 +31,52 @@ class SearchForm extends Component {
     this.zipSearch = this.zipSearch.bind(this);
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     console.log("original value", this.state.zipCode)
-    this.setState({
-      zipCode: this.refs.zip.value
-    });
+    console.log(event.target)
+    await this.setState(prevState => {return {zipCode: this.refs.zip.value}});
     console.log("passing in", this.state.zipCode)
-    this.zipSearch(this.state.zipCode);
+
+    await this.zipSearch(this.state.zipCode);
   }
 
   zipSearch = async (zipCode) => {
     console.log("zip", zipCode)
     let temp = zipCode
-    getCity(temp).then(response => {
-      console.log(response)
-      if (response.data[0].City) {
-        console.log(response.data[0].City);
-        this.setState({
-          city: response.data[0].City,
-          state: response.data[0].State,
-          lat: response.data[0].Lat,
-          lon: response.data[0].Long,
-          population: response.data[0].EstimatedPopulation,
-          wages: response.data[0].TotalWages
-        })
-      }
-    })
+    let response = await getCity(temp)
+      this.setState({
+        city: response.data[0].City,
+        state: response.data[0].State,
+        lat: response.data[0].Lat,
+        lon: response.data[0].Long,
+        population: response.data[0].EstimatedPopulation,
+        wages: response.data[0].TotalWages
+      })
   }
 
 
-  render() {
-    return (
-      <div id="main">
-        <div id='search-form' >
-          <label>
-            Zip Code:
+
+render() {
+  return (
+    <div id="main">
+      <form id='search-form' onSubmit={this.handleSubmit} >
+        <label>
+          Zip Code:
             <input type="text" ref="zip" placeholder="Try 10016" />
-          </label>
-          <button onClick={this.handleSubmit} value="Submit">Submit</button>
-          <h1>{this.state.zipCode}</h1>
-        </div>
-        <div className="ResultsCard">
-          <h1> {this.state.city}, {this.state.state} </h1>
-          <h2> State: {this.state.state} </h2>
-          <h2> Location: {this.state.lat}, {this.state.lon} </h2>
-          <h2> Population (estimated): {this.state.population} </h2>
-          <h2> Total Wages: {this.state.wages}</h2>
-        </div>
+        </label>
+        <input type="button" onClick={this.handleSubmit} value="Submit" />
+        <h1>{this.state.zipCode}</h1>
+      </form>
+      <div className="ResultsCard">
+        <h1> {this.state.city}, {this.state.state} </h1>
+        <h2> State: {this.state.state} </h2>
+        <h2> Location: {this.state.lat}, {this.state.lon} </h2>
+        <h2> Population (estimated): {this.state.population} </h2>
+        <h2> Total Wages: {this.state.wages}</h2>
       </div>
-    );
-  }
+    </div>
+  );
+}
 }
 
 export default SearchForm;
