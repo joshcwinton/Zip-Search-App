@@ -1,6 +1,6 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import SearchForm from './components/SearchForm.js';
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
       <header className="App-header">
         Zip Code Search
       </header>
+      <SearchForm />
     </div>
   );
 }
