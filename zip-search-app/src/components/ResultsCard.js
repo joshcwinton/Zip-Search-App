@@ -1,6 +1,4 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import './ResultsCard.css'
 
@@ -18,11 +16,11 @@ class ResultsCard extends Component {
 
   render() {
     return (
-      <div class = "ResultsCard">
+      <div className = "ResultsCard">
         <h1> {this.state.city}, {this.state.state} </h1>
         <h2> State: {this.state.state} </h2>
         <h2> Location: {this.state.location} </h2>
-        <h2> Population(estimated): {this.state.population} </h2>
+        <h2> Population (estimated): {this.state.population} </h2>
         <h2> Total Wages: {this.state.wages}</h2>
       </div>
     );
@@ -36,4 +34,5 @@ ResultsCard.propTypes = {
   population: PropTypes.number,
   wages: PropTypes.number
 }
+
 export default ResultsCard;
