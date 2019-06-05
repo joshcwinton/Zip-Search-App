@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import ResultsCard from './ResultsCard.js'
-import './Results.css';
+import './SearchForm.js'
+import SearchForm from './Results.css';
 
 class Results extends Component {
   constructor(props){
@@ -14,7 +15,7 @@ class Results extends Component {
   render(){
     return (
       <div className="results-container">
-        <ResultsCard city="Brooklyn" state="New York" location="My Location" population={10} wages={10000}/>
+        <ResultsCard city={this.props.city} state="New York" location="My Location" population={10} wages={10000}/>
       </div>
     )
   }

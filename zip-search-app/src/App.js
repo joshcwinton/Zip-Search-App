@@ -10,7 +10,6 @@ function App() {
         Zip Code Search
       </header>
       <SearchForm />
-      <Results />
     </div>
   );
 }
