@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import ResultsCard from './ResultsCard.js'
 import './Results.css';
-import axios from 'axios';
 
 class Results extends Component {
   constructor(props){
@@ -15,7 +14,6 @@ class Results extends Component {
   render(){
     return (
       <div className="results-container">
-        No Results.
         <ResultsCard city="Brooklyn" state="New York" location="My Location" population={10} wages={10000}/>
       </div>
     )

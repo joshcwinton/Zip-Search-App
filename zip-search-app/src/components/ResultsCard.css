@@ -1,9 +1,10 @@
 .ResultsCard {
-  background-color: #fbe2c3;
-  border-bottom: solid 4px #f7931a;
+  background-color: #ABFFD2;
+  border-bottom: solid 4px #80BF9E;
   border-radius: 20px;
   padding: 20px;
   width: 50%;
+  margin: auto;
 }
 
 h2 {
