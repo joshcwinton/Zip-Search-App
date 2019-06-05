@@ -32,6 +32,7 @@ class SearchForm extends Component {
   }
 
   handleSubmit = (event) => {
+    console.log("original value", this.state.zipCode)
     this.setState({
       zipCode: this.refs.zip.value
     });
