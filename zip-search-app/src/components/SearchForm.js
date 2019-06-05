@@ -15,7 +15,7 @@ class SearchForm extends Component {
       <div id='search-form'>
         <form>
           Zip Code:
-          <input type="search" name="zip" value="hey "/>
+          <input type="text" name="zip" value={this.state.zipCode}/>
         </form>
       </div>
     );
