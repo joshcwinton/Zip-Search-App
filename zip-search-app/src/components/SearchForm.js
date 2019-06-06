@@ -12,6 +12,7 @@ const getCity = async (zipCode) => {
     return await axios.get(url)
   } catch (error) {
     console.error(error)
+    console.log("error here")
   }
 }
 
@@ -25,7 +26,8 @@ class SearchForm extends Component {
       lat: this.props.lat,
       lon: this.props.lon,
       population: this.props.population,
-      wages: this.props.wages
+      wages: this.props.wages,
+      visible: false
     };
     this.handleSubmit = this.handleSubmit.bind(this)
     this.zipSearch = this.zipSearch.bind(this);
@@ -34,7 +36,7 @@ class SearchForm extends Component {
   handleSubmit = async (event) => {
     console.log("original value", this.state.zipCode)
     console.log(event.target)
-    await this.setState(prevState => {return {zipCode: this.refs.zip.value}});
+    await this.setState(prevState => { return { zipCode: this.refs.zip.value } });
     console.log("passing in", this.state.zipCode)
 
     await this.zipSearch(this.state.zipCode);
@@ -44,39 +46,64 @@ class SearchForm extends Component {
     console.log("zip", zipCode)
     let temp = zipCode
     let response = await getCity(temp)
+    console.log("zipcode here")
+    if (!(response===undefined)) {
       this.setState({
         city: response.data[0].City,
         state: response.data[0].State,
         lat: response.data[0].Lat,
         lon: response.data[0].Long,
         population: response.data[0].EstimatedPopulation,
-        wages: response.data[0].TotalWages
+        wages: response.data[0].TotalWages,
+        visible: true
       })
+    }
+    else {
+      this.setState({
+        visible: false
+      })
+    }
   }
 
 
 
-render() {
-  return (
-    <div id="main">
-      <form id='search-form' onSubmit={this.handleSubmit} >
-        <label>
-          Zip Code:
+  render() {
+    if (this.state.visible) {
+      return (
+        <div id="main">
+          <form id='search-form' onSubmit={this.handleSubmit} >
+            <label>
+              Zip Code:
             <input type="text" ref="zip" placeholder="Try 10016" />
-        </label>
-        <input type="button" onClick={this.handleSubmit} value="Submit" />
-        <h1>{this.state.zipCode}</h1>
-      </form>
-      <div className="ResultsCard">
-        <h1> {this.state.city}, {this.state.state} </h1>
-        <h2> State: {this.state.state} </h2>
-        <h2> Location: {this.state.lat}, {this.state.lon} </h2>
-        <h2> Population (estimated): {this.state.population} </h2>
-        <h2> Total Wages: {this.state.wages}</h2>
-      </div>
-    </div>
-  );
-}
+            </label>
+            <input type="button" onClick={this.handleSubmit} value="Submit" />
+            <h1>{this.state.zipCode}</h1>
+          </form>
+          <div className="ResultsCard">
+            <h1> {this.state.city}, {this.state.state} </h1>
+            <h2> State: {this.state.state} </h2>
+            <h2> Location: {this.state.lat}, {this.state.lon} </h2>
+            <h2> Population (estimated): {this.state.population} </h2>
+            <h2> Total Wages: {this.state.wages}</h2>
+          </div>
+        </div>
+      );
+    }
+    else {
+      return (
+        <div id="main">
+          <form id='search-form' onSubmit={this.handleSubmit} >
+            <label>
+              Zip Code:
+            <input type="text" ref="zip" placeholder="Try 10016" />
+            </label>
+            <input type="button" onClick={this.handleSubmit} value="Submit" />
+            <h1>{this.state.zipCode}</h1>
+          </form>
+        </div>
+      );
+    }
+  }
 }
 
-export default SearchForm;
+    export default SearchForm;
